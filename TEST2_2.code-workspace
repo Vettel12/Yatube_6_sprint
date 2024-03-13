@@ -4,5 +4,7 @@
 			"path": ".."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"python.defaultInterpreterPath": "B:\\TEST2_2\\ya_02_zad_free\\venv\\Scripts\\python.exe"
+	}
 }
