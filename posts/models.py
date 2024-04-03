@@ -21,3 +21,14 @@ class Post(models.Model):
     def __str__(self):
        # выводим текст поста 
        return self.text
+
+class FollowerRelation(models.Model):
+    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
+    following = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('follower', 'following')
+
+    @classmethod
+    def is_following(cls, follower, following):
+        return cls.objects.filter(follower=follower, following=following).exists()

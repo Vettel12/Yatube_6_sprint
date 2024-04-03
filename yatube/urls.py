@@ -16,6 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.contrib.flatpages import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     #  обработчик для главной страницы ищем в urls.py приложения posts
@@ -30,4 +33,16 @@ urlpatterns = [
 
     #  раздел администратора
     path("admin/", admin.site.urls),
+
+    # flatpages
+    path('about/', include('django.contrib.flatpages.urls')),
+
+    path('about-author/', views.flatpage, {'url': '/about-author/'}, name='about_author'),
+    path('about-spec/', views.flatpage, {'url': '/about-spec/'}, name='about_spec'),
+
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+    
+    urlpatterns += (path("__debug__/", include(debug_toolbar.urls)),)
