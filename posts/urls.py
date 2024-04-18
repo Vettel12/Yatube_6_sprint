@@ -16,4 +16,6 @@ urlpatterns = [
         name='post_edit'
         ),
     path('follow-unfollow/', views.follow_unfollow, name='follow_unfollow'),
+    path("<username>/<int:post_id>/comment", views.add_comment, name="add_comment"),
+
 ]

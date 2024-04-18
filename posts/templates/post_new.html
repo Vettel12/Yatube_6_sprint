@@ -17,7 +17,7 @@
                     {% endfor %}
                 {% endif %}
 
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
                     {% for field in form %}
@@ -35,8 +35,8 @@
                         </div>
                     {% endfor %}
 
-                    {% if post.group %}   
-                        <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+                    {% if post.group %} 
+                        <a href="/group/{{ post.group.slug }}/">{{ post.group.title }}</a>
                     {% endif %} 
 
                     <div class="col-md-6 offset-md-4">

@@ -1,3 +1,12 @@
+{% load thumbnail %}
+
+<head>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'bootstrap/dist/css/bootstrap.min.css' %}">
+        <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
+        <script src="{% static 'bootstrap/dist/js/bootstrap.min.js' %}"></script>
+</head>
+
 <main role="main" class="container">
     <div class="row">
             <div class="col-md-3 mb-3 mt-1">
@@ -37,20 +46,37 @@
                                 <p class="card-text">
                                         <!-- Ссылка на страницу автора в атрибуте href; username автора в тексте ссылки -->
                                         <a href="{% url 'profile' user.username %}"><strong class="d-block text-gray-dark">@{{ post.author }}</strong></a>
+                                        {% thumbnail post.image "960x339" crop="center" upscale=True as im %}
+                                                <img class="card-img" src="{{ im.url }}">
+                                        {% endthumbnail %}
                                         <!-- Текст поста -->
                                         {{ post.text }}
                                 </p>
-                                <form action="{% url 'follow_unfollow' %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="following_user_id" value="{{ user.id }}">
-                                    <button type="submit" class="btn btn-sm text-muted">
-                                        {% if is_following %}
-                                            Отписаться
-                                        {% else %}
-                                            Подписаться
-                                        {% endif %}
-                                    </button>
-                                </form> 
+                                
+                                {% for comment in post.comment %}
+                                        <div class="card">
+                                                <div class="card-body">
+                                                        <p class="card-text">
+                                                                {{ comment.text }}
+                                                        </p>
+                                                </div>
+                                        </div>
+                                {% endfor %}    
+
+
+                                {% if user_is_logged_in %}
+                                        <form action="{% url 'follow_unfollow' %}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="following_user_id" value="{{ user.id }}">
+                                                <button type="submit" class="btn btn-sm text-muted">
+                                                {% if is_following %}
+                                                        Отписаться
+                                                {% else %}
+                                                        Подписаться
+                                                {% endif %}
+                                                </button>
+                                        </form> 
+                                {% endif %}
                                 <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group ">
                                                 <!-- Ссылка на редактирование, показывается только автору записи -->
