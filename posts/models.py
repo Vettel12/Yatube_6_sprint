@@ -25,22 +25,15 @@ class Post(models.Model):
        # выводим текст поста 
        return self.text
 
-class FollowerRelation(models.Model):
-    follower = models.ForeignKey(User, related_name='following', on_delete=models.CASCADE)
-    following = models.ForeignKey(User, related_name='followers', on_delete=models.CASCADE)
-
-    class Meta:
-        unique_together = ('follower', 'following')
-
-    @classmethod
-    def is_following(cls, follower, following):
-        return cls.objects.filter(follower=follower, following=following).exists()
-
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="comments")
-    text = models.TextField()
+    text = models.TextField(help_text="Введите текст комментария", verbose_name="Текст комментария", max_length=500)
     created = models.DateTimeField("date published", auto_now_add=True)
 
     def __str__(self):
         return self.text
+
+class Follow(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="follower")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following")

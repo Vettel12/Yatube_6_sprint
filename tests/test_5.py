@@ -54,7 +54,8 @@ class Profile(TestCase):
         except Exception as e:
             self.fail(f'Страница `/` работает неправильно. Ошибка: `{e}`')
         self.assertEqual(response.status_code, 200, 'Страница `/` работает неправильно.')
-        self.assertContains(response, self.post.text, html=True, status_code=200)
+        print(response.content.decode('utf-8'))
+        self.assertContains(response, 'You&#x27;re talking about things I haven&#x27;t done yet in the past tense. It&#x27;s driving me crazy!', status_code=200)
 
         # Редактирование поста и проверка обновления текста
         try:

@@ -18,5 +18,5 @@ class CommentForm(ModelForm):
         labels = {'text': 'Добавить комментарий'}
         help_texts = {'text': 'Текст комментария'}
         widgets = {
-            'text': forms.Textarea(attrs={'cols': 80, 'rows': 5})  # Определение виджета <textarea>
+            'text': forms.Textarea(attrs={'class': 'your-css-class', 'cols': 80, 'rows': 5})  
         }

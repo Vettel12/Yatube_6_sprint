@@ -2,6 +2,7 @@ import pytest
 
 from django.test import TestCase, Client
 from posts.models import User, Post, Group
+from django.core.cache import cache
 
 class Profile(TestCase):
     def setUp(self):

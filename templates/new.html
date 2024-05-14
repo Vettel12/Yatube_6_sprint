@@ -1,6 +1,18 @@
 {% extends "base.html" %}
-{% block title %}Новая запись{% endblock %}
-{% block header %}Новая запись{% endblock %}
+{% block title %}
+    {% if is_edit %}
+        Редактировать запись
+    {% else %}
+        Новая запись
+    {% endif %}
+{% endblock %}
+{% block header %}
+    {% if is_edit %}
+        Редактировать запись
+    {% else %}
+        Новая запись
+    {% endif %}
+{% endblock %}
 {% block content %}
 {% load user_filters %}
 
@@ -19,7 +31,7 @@
 
             {% endif %}
 
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
 
                     {% for field in form %}
@@ -38,12 +50,16 @@
                     {% endfor %}
 
                     {% if post.group %}   
-                        <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы</a>
+                        <a href="/group/{{ post.group.slug }}/">все записи группы</a>
                     {% endif %} 
 
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn btn-primary">
+                            {% if is_edit %}
+                            Сохранить
+                            {% else %}
                             Добавить запись
+                            {% endif %}
                         </button>
                     </div>
                 </form>
