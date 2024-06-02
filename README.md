@@ -12,6 +12,12 @@ cd /B/TEST_PROJECT
 git clone https://github.com/Vettel12/Yatube_6_sprint
 ```
 
+Заходим в директорию проекта:
+
+```bash
+cd /Yatube_6_sprint
+```
+
 Устанавливаем виртуальное окружение:
 
 ```bash
@@ -92,3 +98,14 @@ python manage.py createsuperuser
 ```bash
 python manage.py runserver
 ```
+
+Вот такой должен быть резульат, когда зайдете или зарегистрируетесь:
+
+<img width="1000px" src="https://github.com/Vettel12/api_yatube-master/blob/main/images/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202024-05-30%20220142.png?raw=true" align="center" alt="GitHub Readme Stats" />
+
+Главная стариница по адресу: http://127.0.0.1:8000/
+Страница пользователя по адресу: http://127.0.0.1:8000/posts//<str:username>/
+Страница отдельного поста: http://127.0.0.1:8000/posts/<str:username>/<int:post_id>/
+Страница избранных авторов: http://127.0.0.1:8000/follow/
+Страница группы: http://127.0.0.1:8000/group/<slug:slug>/
+Страница админа: http://127.0.0.1:8000/admin/
