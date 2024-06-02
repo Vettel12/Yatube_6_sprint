@@ -80,3 +80,14 @@ tests/test_homework.py::TestGroup::test_group_model PASSED                      
 
 =============================================================== 20 passed in 5.06s ================================================================ 
 ```
+
+Создать суперпользователя:
+
+```bash
+python manage.py createsuperuser
+```
+
+Запустить проект:
+
+```bash
+pyth
