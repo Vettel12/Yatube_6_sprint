@@ -90,4 +90,5 @@ python manage.py createsuperuser
 Запустить проект:
 
 ```bash
-pyth
+python manage.py runserver
+```
